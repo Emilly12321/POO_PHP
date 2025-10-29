@@ -26,11 +26,11 @@ function dividir($a, $b)
     return $a / $b;
 }
 
-//Funcção utilitaria que limpa/normaliza a entrada
+//Função utilitaria que limpa/normaliza a entrada
 function convertendoValor($v)
 {
 
-    $valor = trim($val);
+    $valor = trim($v);
 
     $valor = str_replace(',', '.', $valor);
 
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $operacao = $_POST['operacao'] ?? '';
 
 
-    echo $valor1 = convertendoValor($valor1);
-    echo "<br>";
-    echo $valor2 = convertendoValor($valor2);
+    $valor1 = convertendoValor($valor1);
+    // echo "<br>";
+    $valor2 = convertendoValor($valor2);
 
     $result = null;
     $error = null;
@@ -74,34 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
             case 'dividir':
 
-                if($valor2 == 0){
+                if ($valor2 == 0) {
                     $error = 'Divisão por 0 é inválido, favor informe outro valor';
-                }else{
-                    $result=dividir($valor1,$valor2);
+                } else {
+                    $result = dividir($valor1, $valor2);
                 }
                 break;
-                
-                default:
+
+            default:
                 $error = 'Operação inválida';
         }
     }
 }
 
-
-
-
-
-
-
 ?>
 
 
-
-
-
-
-
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -113,8 +102,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <main>
-    
+    <main class="container">
+        <h1>Resultado</h1>
+
+        <?php
+
+        if ($error !== null) {
+
+            // função htmlspecialchar pode receber até três paremetros, sendo o primeiro nossa string, após isso o parametro que irá lidar com aspas ou apóstrofos, e o ultimo é referente ao charset
+            echo "<p class='error'>" . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . "</p>";
+        } else {
+            echo "<p>Operação:<strong>" . htmlspecialchars($operacao) . "</strong></p>";
+            echo "<p>" . htmlspecialchars($valor1);
+
+            switch ($operacao) {
+                case 'somar':
+                    echo '+';
+                    break;
+
+                case 'subtrair':
+                    echo '-';
+                    break;
+
+                case 'multiplicar':
+                    echo 'x';
+                    break;
+
+                case 'dividir':
+                    echo '/';
+                    break;
+            }
+
+            echo htmlspecialchars($valor2) . "= <strong>" . htmlspecialchars($result) . "</strong></p>";
+        }
+
+        ?>
+
+        <p><a href="index.html">Voltar</a></p>
+
 
 
 
@@ -123,4 +148,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 
-</html> -->
+</html>
+
+
+
+<!-- Efetuando no formato do passo a passo do documento
+             
+            
+            
+            
+            <php if(error !== null): ?>
+                <p class="error"><php echo htmlspecialchar($error,ENT_QUOTES,'UTF-8');?></p>
+            <php else: ?>
+                <p>Operação: <strong> <php echo htmlspecialchar($operacao); ?></strong></p> 
+                <p><php echo htmlspecialchar($valor1); ?> 
+                    <php 
+
+                        switch($operacao){
+
+                            case 'somar': echo '+';break;
+                            case 'subtrair': echo '-';break;
+                            case 'multiplicar': echo '*';break;
+                            case 'dividir': echo '/';break;
+                        
+                        }
+                        
+                    ?>  
+
+                    <php echo htmlspecialchar($valor2)?> =
+                    <strong <php echo htmlspecialchar($result)?> </strong> </p>
+            
+            <php endif; ?>
+            
+            <p><a href="index.html">Voltar</a></p>
+            -->
