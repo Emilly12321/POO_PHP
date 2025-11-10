@@ -21,13 +21,15 @@ final class Calculadora{
 
     public static function dividir(float $a, float $b) : float
     {
-        if ($b == 0) {
+        if ($b === 0) {
             return "Erro: divisão por zero";
         }
         return $a / $b;
     }
 
-    public static exibirResultados(?string $er, string $oper, ?float $valor1, ?float $valor2,?float $resultado){
+
+    public static function exibirResultado(?string $er, string $oper, ?float $valor1 ,  ?float $valor2 , ?float $resultado)   
+    {
 
         echo "<h1>Resultado</h1>";
 
@@ -35,9 +37,47 @@ final class Calculadora{
 
             echo '<p class="error">'.htmlspecialchars($er,ENT_QUOTES,'UTF-8').'</p>';
 
+        }else{
+
+            echo '<p>Operação: <strong>'.htmlspecialchars($oper,ENT_QUOTES,'UTF-8').'</strong></p>';
+            echo '<p>'.htmlspecialchars($valor1,ENT_QUOTES,'UTF-8').' ';
+
+            switch($oper){
+                case 'somar':
+                    echo '+';
+                break;
+                case 'subtrair':
+                    echo '-';
+                break;
+                case 'multiplicar':
+                    echo 'x';
+                break;
+                case 'dividir':
+                    echo '/';
+                break;
+            }
+            echo ' '. htmlspecialchars($valor2,ENT_QUOTES,'UTF-8');
+            echo '= <strong>'.htmlspecialchars($resultado,ENT_QUOTES,'UTF-8').'</strong></p>';
+
         }
+        echo '<p><a href="index.html">Voltar</a></p>';
 
     }
+
+    public static function convertendoValor($v): ?float
+    {
+
+        $valor = trim($v);
+
+        $valor = str_replace(',', '.', $valor);
+
+        if (!preg_match('/^\s*[+-]?\d+(?:[\.,]\d+)?\s*$/', $valor)) {
+            return null;
+        }
+
+        return floatval($valor);
+    }
+
 
 }
 
@@ -45,19 +85,6 @@ final class Calculadora{
 
 
 //Função utilitaria que limpa/normaliza a entrada
-function convertendoValor($v)
-{
-
-    $valor = trim($v);
-
-    $valor = str_replace(',', '.', $valor);
-
-    if (!preg_match('/^\s*[+-]?\d+(?:[\.,]\d+)?\s*$/', $valor)) {
-        return null;
-    }
-
-    return floatval($valor);
-}
 
 
 
@@ -101,7 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-        Calculadora::exibirResultado($error,$operacao,$vlr1,$vlr2,$result);
 }
 
 ?>
@@ -120,42 +146,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <main class="container">
-        <h1>Resultado</h1>
 
         <?php
 
-        if ($error !== null) {
-
-            // função htmlspecialchar pode receber até três paremetros, sendo o primeiro nossa string, após isso o parametro que irá lidar com aspas ou apóstrofos, e o ultimo é referente ao charset
-            echo "<p class='error'>" . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . "</p>";
-        } else {
-            echo "<p>Operação:<strong>" . htmlspecialchars($operacao) . "</strong></p>";
-            echo "<p>" . htmlspecialchars($valor1);
-
-            switch ($operacao) {
-                case 'somar':
-                    echo '+';
-                    break;
-
-                case 'subtrair':
-                    echo '-';
-                    break;
-
-                case 'multiplicar':
-                    echo 'x';
-                    break;
-
-                case 'dividir':
-                    echo '/';
-                    break;
-            }
-
-            echo htmlspecialchars($valor2) . "= <strong>" . htmlspecialchars($result) . "</strong></p>";
-        }
+        
+        Calculadora::exibirResultado($error,$operacao,$vlr1,$vlr2,$result);
 
         ?>
 
-        <p><a href="index.html">Voltar</a></p>
+
 
 
 
