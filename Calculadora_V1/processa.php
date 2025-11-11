@@ -21,7 +21,8 @@ final class Calculadora{
 
     public static function dividir(float $a, float $b) : float
     {
-        if ($b === 0) {
+        if ($b === 0.0){
+            
             return "Erro: divisão por zero";
         }
         return $a / $b;
@@ -81,13 +82,9 @@ final class Calculadora{
 
 }
 
-// Programação estruturada: cada operação é implementada em função separada.
 
 
-//Função utilitaria que limpa/normaliza a entrada
-
-
-
+/* Código de controle */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -106,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         switch ($operacao) {
             case 'somar':
+                /* Indo na Classe Calculadora e acessando o método estatico chamado somar e enviando os parametros para ela */
                 $result = Calculadora::somar($valor1, $valor2);
                 break;
             case 'subtrair':
