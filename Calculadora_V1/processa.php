@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Calculadora Estruturada</title>
+    <title>Calculadora_POOv1</title>
 </head>
 
 <body>
@@ -166,33 +166,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-<!-- Efetuando no formato do passo a passo do documento
-             
-            
-            
-            
-            <php if(error !== null): ?>
-                <p class="error"><php echo htmlspecialchar($error,ENT_QUOTES,'UTF-8');?></p>
-            <php else: ?>
-                <p>Operação: <strong> <php echo htmlspecialchar($operacao); ?></strong></p> 
-                <p><php echo htmlspecialchar($valor1); ?> 
-                    <php 
-
-                        switch($operacao){
-
-                            case 'somar': echo '+';break;
-                            case 'subtrair': echo '-';break;
-                            case 'multiplicar': echo '*';break;
-                            case 'dividir': echo '/';break;
-                        
-                        }
-                        
-                    ?>  
-
-                    <php echo htmlspecialchar($valor2)?> =
-                    <strong <php echo htmlspecialchar($result)?> </strong> </p>
-            
-            <php endif; ?>
-            
-            <p><a href="index.html">Voltar</a></p>
-            -->
