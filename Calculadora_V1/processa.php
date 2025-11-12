@@ -22,14 +22,14 @@ final class Calculadora{
     public static function dividir(float $a, float $b) : float
     {
         if ($b === 0.0){
-            
+
             return "Erro: divisão por zero";
         }
         return $a / $b;
     }
 
 
-    public static function exibirResultado(?string $er, string $oper, ?float $valor1 ,  ?float $valor2 , ?float $resultado)   
+    public static function exibirResultado(?string $er, string $oper, ?float $valor1 ,  ?float $valor2 , ?float $resultado): void
     {
 
         echo "<h1>Resultado</h1>";
@@ -72,7 +72,7 @@ final class Calculadora{
 
         $valor = str_replace(',', '.', $valor);
 
-        if (!preg_match('/^\s*[+-]?\d+(?:[\.,]\d+)?\s*$/', $valor)) {
+        if (!preg_match('/^\s*[+-]?\d+(?:[\.,]\d+)?\s*$/',$valor)) {
             return null;
         }
 
@@ -88,9 +88,9 @@ final class Calculadora{
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $valor1 = $_POST['valor1'] ?? '';
-    $valor2 = $_POST['valor2'] ?? '';
-    $operacao = $_POST['operacao'] ?? '';
+    $valor1 = $_POST['valor1'] ?? " ";
+    $valor2 = $_POST['valor2'] ?? " ";
+    $operacao = $_POST['operacao'] ?? " ";
 
     $vlr1 = Calculadora::convertendoValor($valor1);
     $vlr2 = Calculadora::convertendoValor($valor2);
@@ -98,26 +98,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = null;
     $error = null;
 
-    if ($valor1 === null || $valor2 === null) {
+    if ($vlr1 === null || $vlr2 === null) {
         $error = 'Entrada inválida. Favor preencher corretamente os campos.';
     } else {
         switch ($operacao) {
             case 'somar':
                 /* Indo na Classe Calculadora e acessando o método estatico chamado somar e enviando os parametros para ela */
-                $result = Calculadora::somar($valor1, $valor2);
+                $result = Calculadora::somar($vlr1, $vlr2);
                 break;
             case 'subtrair':
-                $result = Calculadora::subtrair($valor1, $valor2);
+                $result = Calculadora::subtrair($vlr1, $vlr2);
                 break;
             case 'multiplicar':
-                $result = Calculadora::multiplicar($valor1, $valor2);
+                $result = Calculadora::multiplicar($vlr1, $vlr2);
                 break;
             case 'dividir':
 
-                if ($valor2 == 0) {
+                if ($vlr2 == 0) {
                     $error = 'Divisão por 0 é inválido, favor informe outro valor';
                 } else {
-                    $result = Calculadora::dividir($valor1, $valor2);
+                    $result = Calculadora::dividir($vlr1, $vlr2);
                 }
                 break;
 
