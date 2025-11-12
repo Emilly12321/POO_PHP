@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
+    <title>Calculadora_POOV2</title>
+</head>
+
+<body>
+    <main class="container">
+
+        <h1>Calculadora - Programação Estruturada</h1>
+
+        <form id="calcForm" method="POST" action="processa.php" onsubmit="return validaFormulario()">
+
+            <div class="field">
+                <label for="valor1">Valor 1</label>
+                <!-- Autocomplete é para evitar sugestões vinda do navegador para o campo -->
+                <input type="text" id="valor1" name="valor1" required autocomplete="off">
+            </div>
+
+            <div class="field">
+                <label for="valor2">Valor 2</label>
+                <!-- Autocomplete é para evitar sugestões vinda do navegador para o campo -->
+                <input type="text" id="valor2" name="valor2" required autocomplete="off">
+            </div>
+
+
+            <div class="field">
+                <label for="operacao">Operação</label>
+                <select name="operacao" id="operacao">
+                    <option value="somar">Somar(+)</option>
+                    <option value="subtrair">Subtrair(-)</option>
+                    <option value="multiplicar">multiplicar(*)</option>
+                    <option value="dividir">Dividir(/)</option>
+                </select>
+            </div>
+            <br>
+            <div class="action">
+                <button type="submit">Calcular</button>
+                <button type="reset">Limpar</button>
+
+            </div>
+
+        </form>
+
+
+        <footer>
+            <p>Enviar os valores e operações para o `processa.php` que preocessará a função correspondente</p>
+        </footer>
+
+    </main>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
