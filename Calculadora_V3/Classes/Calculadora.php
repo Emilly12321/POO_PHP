@@ -2,6 +2,8 @@
 
 final class Calculadora{
 
+
+    /* Encapsulando--> utilizar os modificadores (public, private, protected), para exercer um controle de acesso para o que queremos*/
     public function somar(float $a, float $b) : float
     {
         return $a + $b;
