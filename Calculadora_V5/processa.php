@@ -1,11 +1,13 @@
 <?php
 
 /*Importando as Classes para que seja possivel utiliza-las */
+require_once 'Interface\IOperacao.php';
 require_once 'Classes\Soma.php';
 require_once 'Classes\Subtrair.php';
 require_once 'Classes\Multiplicar.php';
 require_once 'Classes\Dividir.php';
 require_once 'Classes\TrataeMostra.php';
+
 
 /* Código de controle */
 
@@ -31,32 +33,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             case 'somar':
 
                 $somaObjeto = new Soma();
-                $somaObjeto->setNumero1($vlr1);
-                $somaObjeto->setNumero2($vlr2);
-                $result = $somaObjeto->calcularSoma();
+                $somaObjeto->setNum1($vlr1);
+                $somaObjeto->setNum2($vlr2);
+                $result = $somaObjeto->calcula();
 
                 break;
             case 'subtrair':
 
                 $subtrairObjeto = new Subtrair();
-                $subtrairObjeto->setNumero1($vlr1);
-                $subtrairObjeto->setNumero2($vlr2);
-                $result = $subtrairObjeto->calcularSubtrair();
+                $subtrairObjeto->setNum1($vlr1);
+                $subtrairObjeto->setNum2($vlr2);
+                $result = $subtrairObjeto->calcula();
 
                 break;
 
             case 'multiplicar':
 
                 $multiplicarObjeto = new Multiplicar();
-                $multiplicarObjeto->setNumero1($vlr1);
-                $multiplicarObjeto->setNumero2($vlr2);
-                $result = $multiplicarObjeto->calcularMultiplicar();
+                $multiplicarObjeto->setNum1($vlr1);
+                $multiplicarObjeto->setNum2($vlr2);
+                $result = $multiplicarObjeto->calcula();
 
                 break;
 
             case 'dividir':
 
-                if ($vlr2 === 0) 
+                if ($vlr2 == 0) 
                 {
 
                     $error = 'Divisão por 0 é inválido, favor informe outro valor';
@@ -66,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 {
 
                     $dividirObjeto = new Dividir();
-                    $dividirObjeto->setNumero1($vlr1);
-                    $dividirObjeto->setNumero2($vlr2);
-                    $result = $dividirObjeto->calcularDividir();
+                    $dividirObjeto->setNum1($vlr1);
+                    $dividirObjeto->setNum2($vlr2);
+                    $result = $dividirObjeto->calcula();
 
                 }
 
