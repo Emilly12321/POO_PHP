@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Calculadora_POOV2</title>
+    <title>Calculadora_POOV3</title>
 </head>
 
 <body>
