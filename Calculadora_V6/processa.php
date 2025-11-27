@@ -52,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             if ($vlr2 === 0.0) 
                             {
                                 
-                                $error = 'Divisão por 0 é inválido, favor informe outro valor';
-                                
+                                $error = "Divisão por 0 é inválido, favor informe outro valor";
                             } 
                             else 
                             {
@@ -61,16 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $tipoCalculo = new Dividir();
                                 
                             }
-
                             break;
+
                             
                         }
+                            if(empty($error)){
 
-        $tipoCalculo->setNum1($vlr1);
-        $tipoCalculo->setNum2($vlr2);
-        $result= $tipoCalculo->calcula();
-    }
-
+                                $tipoCalculo->setNum1($vlr1);
+                                $tipoCalculo->setNum2($vlr2);
+                                $result = $tipoCalculo->calcula();
+                            }
+                        
+                    }
+                    
 }
 
 ?>

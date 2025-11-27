@@ -13,5 +13,4 @@ final class Subtrair extends Operacao{
 }
 
 
-
 ?>
