@@ -34,7 +34,7 @@ final class TrataeMostra{
             echo '= <strong>'.htmlspecialchars($resultado,ENT_QUOTES,'UTF-8').'</strong></p>';
 
         }
-        echo '<p><a href="..\index.html">Voltar</a></p>';
+        echo '<p><a href="..\View\index.html">Voltar</a></p>';
 
     }
 
