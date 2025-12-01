@@ -9,4 +9,33 @@ interface IOperacao
     
 }
 
+
+
+
+abstract class Animal {
+
+    public function som():void{
+        echo "Som aleátorio de Animal";
+    }
+
+}
+
+final class Ave extends Animal{
+
+    // Modificando para o sentido da classe
+     public function som():void{
+        echo "Som: Piu Piu";
+    }
+
+}
+
+final class Terrestre extends Animal{
+    
+    // Modificando para o sentido da classe
+     public function som():void{
+        echo "Som: Au au";
+    }
+
+}
+
 ?>
