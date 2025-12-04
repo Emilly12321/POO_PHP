@@ -16,6 +16,7 @@ class Casa {
     private float $tamanho = 0.0;
 
 
+
     
     public function getQuartos():int{
         return $this->quartos;
@@ -92,8 +93,28 @@ class Casa {
 
 
     public function contarAberturasAbertas(){
-        
-        // foreach nas listas === 1
+        $contadorAberto = 0;
+
+        foreach($this->listaDeJanelas as $janelasAbertas){
+            $janelas = $janelasAbertas->getEstado();
+
+            if($janelas === 1){
+                $contadorAberto++;
+            }
+
+        }
+        foreach($this->listaDePortas as $portasAbertas){
+            $portas = $portasAbertas->getEstado();
+
+            if($portas === 1){
+                $contadorAberto++;
+            }
+
+        }
+
+        return $contadorAberto;
+
+
     }
 
 
@@ -125,18 +146,24 @@ class Casa {
     }
 
     public function getInfoCasa():string {
+        $contador = 0;
         $info = "<h2>Informações da Casa </h2>";
         $info .= "<p><strong>Descrição:</strong>{$this->descricao} </p>";
         $info .= "<p><strong>Cor:</strong>{$this->cor}</p>";
-        $info .= "<p><strong>Tamanho em M²:</strong>{$this->tamanho}</p>";
+        $info .= "<p><strong>Tamanho em M²:</strong>{$this->tamanho}</p>";  
         $info .= "<p><strong>Quantidade de Quartos:</strong>{$this->quartos}</p>";
         $info .= "<p><strong>Quantidade de Banheiros:</strong>{$this->banheiros}</p>";
+        $info .= "<p><strong> Qtdade de portas e janelas abertas:</strong> ".$this->contarAberturasAbertas()."<p>";
+
 
         $info .= "<h3>Portas: </h3>";
         if(!empty($this->listaDePortas)){
             foreach($this->listaDePortas as $portas){
                 $estado = $portas->getEstadoTexto(); /* Utilizando o método implementado em Abertura */
                 $info .= "<p>{$portas->getDescricao()} - {$estado}</p>";
+                // if($estado === "Aberta"){
+                //     $contador++;
+                // }
             }
         }else{
             $info .= "<p>Nenhuma porta cadastrada</p>";
@@ -147,10 +174,15 @@ class Casa {
             foreach($this->listaDeJanelas as $janela){
                 $estado = $janela->getEstadoTexto();
                 $info .= "<p>{$janela->getDescricao()} - {$estado}</p>";
+                // if($estado === "Aberta"){
+                //     $contador++;
+                // }
             }
         }else{
             $info .= "<p>Nenhuma janela cadastrada</p>";
         }
+        // $info .="<p>Quantidade de Janelas e Portas Abertas:".$contador."</p>";
+
         return $info;
     }
 
@@ -158,3 +190,5 @@ class Casa {
 
 
 ?>
+
+
