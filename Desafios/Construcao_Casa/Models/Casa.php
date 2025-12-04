@@ -11,6 +11,43 @@ class Casa {
     private string $cor;
     private array $listaDePortas = [];
     private array $listaDeJanelas = [];
+    private int $quartos = 0;
+    private int $banheiros = 0;
+    private float $tamanho = 0.0;
+
+
+    
+    public function getQuartos():int{
+        return $this->quartos;
+
+    }
+
+     public function setQuartos(int $quartos):void{
+        $this->quartos = $quartos;
+    }
+
+
+    
+    
+    public function getBanheiros():int{
+        return $this->banheiros;
+        
+    }
+    
+    public function setBanheiros(int $banheiros):void{
+       $this->banheiros = $banheiros;
+   }
+
+
+       
+    public function getTamanho():float{
+        return $this->tamanho;
+    }
+
+     public function setTamanho(float $tamanho):void{
+        $this->tamanho = $tamanho;
+    }
+
 
 
 
@@ -18,6 +55,8 @@ class Casa {
         return $this->descricao;
 
     }
+
+
 
     public function setDescricao(string $descricao):void{
 
@@ -80,6 +119,9 @@ class Casa {
         $info = "<h2>Informações da Casa </h2>";
         $info .= "<p><strong>Descrição:</strong>{$this->descricao} </p>";
         $info .= "<p><strong>Cor:</strong>{$this->cor}</p>";
+        $info .= "<p><strong>Tamanho em M²:</strong>{$this->tamanho}</p>";
+        $info .= "<p><strong>Quantidade de Quartos:</strong>{$this->quartos}</p>";
+        $info .= "<p><strong>Quantidade de Banheiros:</strong>{$this->banheiros}</p>";
 
         $info .= "<h3>Portas: </h3>";
         if(!empty($this->listaDePortas)){

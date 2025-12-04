@@ -28,6 +28,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <label><strong>Cor da casa</strong></label><br>
                 <input type="text" name="cor" required> <br><br>
 
+                <label><strong>Tamanho da Casa em M²</strong></label><br>
+                <input type="text" name="tamanhoM2" required> <br><br>
+
+                <label><strong>Quantidade de Quartos:</strong></label><br>
+                <input type="number" name="qtde_quartos" min="0" required> <br><br>
+
+                <label><strong>Quantidade de Banheiros:</strong></label><br>
+                <input type="number" name="qtde_banheiros" min="0" required> <br><br>
+
 
                 <label><strong>Quantidade de portas:</strong></label><br>
                 <input type="number" name="qtde_portas" min="0" required> <br><br>
@@ -45,6 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $cor = $_POST['cor'] ?? '';
                 $qtde_Portas = (int)($_POST['qtde_portas'] ?? 0);
                 $qtde_Janelas = (int)($_POST['qtde_janelas'] ?? 0);
+                $qtde_Banheiros = (int) ($_POST['qtde_banheiros']??0);
+                $qtde_Quartos = (int) ($_POST['qtde_quartos']??0);
+                $tamanhoM2 = (float) ($_POST['tamanhoM2']??0.0);
                 
                 echo "<h2>Etapa 2 : Definir portas e janelas</h2>";
                 echo '<form action="processa.php" method="POST">';
@@ -53,7 +65,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo "<input type ='hidden' name='descricao' value='{$descricao}'>";
                 echo "<input type ='hidden' name='cor' value='{$cor}'>";
                 echo "<input type ='hidden' name='qtde_portas' value='{$qtde_Portas}'>";
-                echo "<input type ='hidden' name='qtde_janelas' value='{$qtde_Janelas}'>";
+                echo "<input type ='hidden' name='qtde_janelas' value='{$qtde_Janelas}'>";  
+                echo "<input type ='hidden' name='qtde_banheiros' value='{$qtde_Banheiros}'>";  
+                echo "<input type ='hidden' name='qtde_quartos' value='{$qtde_Quartos}'>";  
+                echo "<input type ='hidden' name='tamanhoM2' value='{$tamanhoM2}'>";  
                 
                 if($qtde_Portas>0){
                     echo "<h3>Portas</h3>";
@@ -90,10 +105,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     $cor = $_POST['cor'] ?? '';
                     $qtde_Portas = (int) ($_POST['qtde_portas']??0);
                     $qtde_Janelas = (int) ($_POST['qtde_janelas']??0);
+                    $qtde_Banheiros = (int) ($_POST['qtde_banheiros']??0);
+                    $qtde_Quartos = (int) ($_POST['qtde_quartos']??0);
+                    $tamanhoM2 = (float) ($_POST['tamanhoM2']??0.0);
+
                     
                     $casa = new Casa();
                     $casa->setDescricao($descricao);
                     $casa->setCor($cor);
+                    $casa->setBanheiros($qtde_Banheiros);
+                    $casa->setQuartos($qtde_Quartos);
+                    $casa->setTamanho($tamanhoM2);
 
                     $listaPortas = [] ;
 
@@ -119,6 +141,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     echo "<h2>Casa contruída com sucesso!</h2>";
                     echo "<p><strong>Descrição:</strong>{$casa->getDescricao()}</p>";
                     echo "<p><strong>Cor:</strong>{$casa->getCor()}</p>";
+                    echo "<p><strong>Tamanho em M²:</strong>{$casa->getTamanho()}</p>";
+                    echo "<p><strong>Quantidade de Quartos:</strong>{$casa->getQuartos()}</p>";
+                    echo "<p><strong>Quantidade de Banheiros:</strong>{$casa->getBanheiros()}</p>";
 
                     echo "<h3>Portas: </h3>";
                     foreach($casa->getListaDePortas() as $portas){
