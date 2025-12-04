@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'Aberturas.php';
-require_once 'Portas.php';
+require_once 'Porta.php';
 require_once 'Janelas.php';
 
 
@@ -11,6 +11,7 @@ class Casa {
     private string $cor;
     private array $listaDePortas = [];
     private array $listaDeJanelas = [];
+
 
 
     public function getDescricao():string{
@@ -83,8 +84,8 @@ class Casa {
         $info .= "<h3>Portas: </h3>";
         if(!empty($this->listaDePortas)){
             foreach($this->listaDePortas as $portas){
-                $estado = $porta->getEstadoTexto(); /* Utilizando o método implementado em Abertura */
-                $info .= "<p>{$porta->getDescricao()} - {$estado}</p>";
+                $estado = $portas->getEstadoTexto(); /* Utilizando o método implementado em Abertura */
+                $info .= "<p>{$portas->getDescricao()} - {$estado}</p>";
             }
         }else{
             $info .= "<p>Nenhuma porta cadastrada</p>";
