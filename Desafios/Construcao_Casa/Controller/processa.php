@@ -147,14 +147,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     echo "<h3>Portas: </h3>";
                     foreach($casa->getListaDePortas() as $portas){
-                        $estado = $portas->getEstado() ==1 ? "Aberta" : "Fechada";
+                        $estado = $portas->getEstado() == 1 ? "Aberta" : "Fechada";
                         echo "<p>{$portas->getDescricao()} - {$estado}</p>";
                     }
 
 
                        echo "<h3>Janelas: </h3>";
                     foreach($casa->getListaDeJanelas() as $janelas){
-                        $estado = $janelas->getEstado() ==1 ? "Aberta" : "Fechada";
+                        $estado = $janelas->getEstado() == 1 ? "Aberta" : "Fechada";
                         echo "<p>{$janelas->getDescricao()} - {$estado}</p>";
                     }
                     $_SESSION['casa'] = serialize($casa);

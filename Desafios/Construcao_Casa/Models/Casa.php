@@ -81,12 +81,19 @@ class Casa {
     }
 
 
+
     public function getListaDeJanelas():array{
         return $this->listaDeJanelas;
     }
 
     public function setListaDeJanelas(array $listaDeJanelas):void{
         $this->listaDeJanelas = $listaDeJanelas;
+    }
+
+
+    public function contarAberturasAbertas(){
+        
+        // foreach nas listas === 1
     }
 
 
@@ -111,6 +118,8 @@ class Casa {
 
     }
 
+
+    // Usando a mãe para aceitar tanto Porta quanto Janela, ao invés de criar um método para casa
     public function moverAbertura(Aberturas $abertura, int $novoEstado):void {
         $abertura->setEstado($novoEstado);
     }
