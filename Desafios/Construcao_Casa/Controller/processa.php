@@ -158,13 +158,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         echo "<p>{$janelas->getDescricao()} - {$estado}</p>";
                     }
                     $_SESSION['casa'] = serialize($casa);
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
 
                 case 'movimentar':
                     if(!isset($_SESSION['casa'])){
                         echo "<h2>Nenhuma casa foi construída ainda!</h2>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                        echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                         exit;
                     }
 
@@ -184,7 +184,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     
                     ';
 
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
                 
                 case 'selecionar_abertura':
@@ -197,7 +197,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     if(empty($lista)){
 
                         echo "<h2>Nenhuma" .($tipo === 'porta' ? "porta" : "janela")."</h2>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                        echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                         exit;
 
                     }
@@ -216,7 +216,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     echo "<button type='submit'>Avançar</button>";
                     echo "</form>";
 
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
 
                 break;
                     // Etapa 3: Aplicar o novo estado
@@ -228,7 +228,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     $abertura = $casa->retornaAbertura($tipo, $posicao);
                     if (!$abertura) {
                         echo "<h2>Abertura inválida.</h2>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                        echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                         exit;
                     }
 
@@ -248,7 +248,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     echo "<button type='submit'>Aplicar</button>";
                     echo "</form>";
 
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
 
                 // Etapa 4: Confirmar e salvar o estado
@@ -270,7 +270,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         echo "<h2>Erro ao movimentar abertura.</h2>";
                     }
 
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
                 // Seleciona tipo abertura
                 case 'selecionar_tipo_abertura':
@@ -285,7 +285,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 case 'ver_info':
                     if (!isset($_SESSION['casa'])) {
                         echo "<h2> Nenhuma casa foi construída ainda!</h2>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                        echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                         break;
                     }
 
@@ -296,25 +296,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <button type='submit' name='acao' value='limpar_sessao'>Nova Construção</button>
                         </form>";
 
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
-                break;
+                        echo "<a href='..\View\index.html'>Voltar ao menu</a>";
+                        break;
                 case 'limpar_sessao':
                     session_unset();
                     session_destroy();
 
                     echo"<h2>Dados da casa apagado!</h2>";
                     echo"<p>Você pode construir uma nova casa agora</p>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
                 default:
                     echo "<h2>Ação inválida.</h2>";
-                    echo "<a href='..\index.html'>Voltar ao menu</a>";
+                    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
 
                 }
 }else{
     echo "<h2>Nunhuma ação recebidada!</h2>";
-    echo "<a href='../index.html'>Voltar ao menu</a>";
+    echo "<a href='..\View\index.html'>Voltar ao menu</a>";
 
 }
 
