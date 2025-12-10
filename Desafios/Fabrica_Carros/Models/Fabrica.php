@@ -14,31 +14,38 @@ class Fabrica{
         }
     }
 
-    public function venderCarros(string $modelo, string $cor){
+    public function venderCarros(string $modelo, string $cor):bool{
 
-        print_r($this->guardarCarros);
-
+        $validador = 0;
     
         foreach($this->guardarCarros as $i => $guardarCarros){
 
             if( $guardarCarros->getModelo() === $modelo &&  $guardarCarros->getCor() === $cor){
 
                 unset($this->guardarCarros[$i]);
-              
-                $this->guardarCarros = array_values($this->guardarCarros);
-               
-                return true;
-                
+                $validador++;
+
             }
+            
+        }
+
+        if($validador>0){
+
+            return true;
+
+        }else{
+
+            return false;
 
         }
-        return false;
-
+        
     }
 
 
 
-    public function mostrarCarros(){
+    public function mostrarCarros():string{
+
+        $this->guardarCarros = array_values($this->guardarCarros);
 
         foreach($this->guardarCarros as $i => $carro){
             echo "<p>".($i+1)."° Carro, Modelo:".$carro->getModelo()." Cor:".$carro->getCor()."</p><br>";

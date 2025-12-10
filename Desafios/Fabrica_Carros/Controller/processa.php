@@ -51,10 +51,10 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             echo "
             <form>
             
-            <label>Modelo: {$modelo}</label>
-            <label>Cor: {$cor}</label>
-            <label>Quantidade que foram cadastrados: {$qtdeFabricar}</label>
-            </form>
+            <label>Modelo: {$modelo}</label> <br>
+            <label>Cor: {$cor}</label> <br>
+            <label>Quantidade que foram cadastrados: {$qtdeFabricar}</label><br>
+            </form> <br>
             <a href='..\View\index.html'>Voltar ao menu</a>
             ";
 
@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             
             <form action="processa.php" method="POST">
             
-            <input type="hidden" name="acao" value="venderCarro";
+            <input type="hidden" name="acao" value="venderCarro">
             
             <label>Modelo: </label>
             <input type="text" name="modelo">
@@ -78,31 +78,24 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             </form>';
             break;
         case "venderCarro":
-
-             if(!isset($_SESSION['fabrica'])){
-                echo"<p>Não há carros cadastrados com essas informações!</p><br>
-                <a href='..\View\index.html'>Voltar ao menu</a>";
-                break;
-            }
+            
+            $modelo = $_POST['modelo'] ?? "";
+            $cor = $_POST['cor'] ?? "";
 
             $fabrica = unserialize($_SESSION['fabrica']);
 
-            $modelo = $_POST['modelo'] ?? "";
-            $cor = $_POST['cor'] ?? "";
 
             $validador = $fabrica->venderCarros($modelo,$cor);
 
             if($validador){
                 
                 echo "
-                <h3>Vendidos com sucesso!!</h3>
+                <h3>Carros vendidos com sucesso!!</h3>
+
                 <form>
                 
-                <label>Modelo:</label>
-                <input type='hidden' name='modelo' value='{$modelo}'>
-                <label>Cor:</label>
-                <input type='hidden' name='cor' value='$cor'>
-                
+                <label>Modelo: {$modelo}</label><br>
+                <label>Cor: {$cor}</label>                
                 
                 </form>";
 

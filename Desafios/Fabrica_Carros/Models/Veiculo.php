@@ -1,6 +1,5 @@
 <?php 
 
-
 abstract class Veiculo{
     private $modelo;
     private $cor;
