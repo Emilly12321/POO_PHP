@@ -131,7 +131,7 @@ class Casa {
 
     }
 
-    // Pesquisar sobre esse tipo
+    // ?Abertura é pq eu estou dizendo que o retorno vai ser um objeto herdado indiretamente pela classe aberturas ou null
     public function retornaAbertura(string $tipo, int $indice): ?Aberturas {
 
         $lista = $this->getAberturasPorTipo($tipo);
@@ -140,9 +140,10 @@ class Casa {
     }
 
 
-    // Usando a mãe para aceitar tanto Porta quanto Janela, ao invés de criar um método para casa
+    // Usando a mãe para aceitar tanto Porta quanto Janela, ao invés de criar um método para cada
     public function moverAbertura(Aberturas $abertura, int $novoEstado):void {
         $abertura->setEstado($novoEstado);
+        // o $abertura aqui é o nosso objeto, Porta ou Janela...
     }
 
     public function getInfoCasa():string {
