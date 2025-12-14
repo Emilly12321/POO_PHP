@@ -3,6 +3,8 @@
 session_start();
 
 require_once '../Models/Fabrica.php';
+require_once '../Models/Carro.php';
+require_once '../Models/Motos.php';
 
 if($_SERVER['REQUEST_METHOD']==="POST"){
     $acao = $_POST['acao']??"";
@@ -14,11 +16,17 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             <section>
             
             <form action="processa.php" method="POST">
-            <input type="hidden" name="acao" value="criandoCarro">
+            <input type="hidden" name="acao" value="criandoVeiculo">
             
             
-            <label>Quantidade de carros a serem Fabricados:</label>
-            <input type="number" min="1" name="qtdeFabricar">
+            <label>Quantidade de veiculos a serem Fabricados:</label>
+            <input type="number" min="1" name="qtdeFabricar"><br><br>
+            <label>Escolha um veiculo para ser fabricado:</label>
+            <select name="tipo_veiculo">
+                <option value="moto">Moto</option>
+                <option value="carro">Carro</option>
+
+            </select><br><br>       
             <button type="submit">Confirmar</button>
             
 
@@ -31,19 +39,24 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             echo "
                 <a href='..\View\index.html'>Voltar ao menu</a>";
             break;
-        case"criandoCarro":
+        case"criandoVeiculo":
             
             $qtdeFabricar = $_POST['qtdeFabricar']??"";
+            $tipo = $_POST['tipo_veiculo'] ?? "";
 
             echo "
             <section>
-
+            <h1>Fabricando $tipo</h1>
             <form action='processa.php' method='POST'>
-            <input type='hidden' name='acao' value='salvarCarro'>
-            <input type ='hidden' name='qtdeFabricar' value='{$qtdeFabricar}'>";
+            <input type='hidden' name='acao' value='salvarVeiculo'>
+            <input type ='hidden' name='qtdeFabricar' value='{$qtdeFabricar}'>
+            <input type ='hidden' name='tipo_veiculo' value='{$tipo}'>
+            
+            
+            ";
 
             for($i = 1 ; $i <= $qtdeFabricar ; $i++){
-
+                
                 echo"<br>
                 <label>Modelo:</label>
                 <input type='text' name='modelo_{$i}'><br>
@@ -61,9 +74,10 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             
 
             break;
-        case "salvarCarro":
+        case "salvarVeiculo":
 
             $qtdeFabricar = $_POST['qtdeFabricar']??"";
+            $tipo = $_POST['tipo_veiculo'] ?? "";
           
             if(isset($_SESSION['fabrica'])){
                $fabrica = unserialize($_SESSION['fabrica']);
@@ -75,13 +89,17 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             $veiculos = [];
 
             for($i = 1 ;$i <= $qtdeFabricar ; $i++){
+                if($tipo == "moto"){
+                    $veiculo = new Motos();
+                }else{
+                    $veiculo = new Carro();
 
-                $carro = new Carro();
-                $carro->setModelo($_POST["modelo_{$i}"]??"");
-                $carro->setCor($_POST["cor_{$i}"]??"");
-                $veiculos[] = $carro;
+                }
+                $veiculo->setModelo($_POST["modelo_{$i}"]??"");
+                $veiculo->setCor($_POST["cor_{$i}"]??"");
+                $veiculos[] = $veiculo;
             }
-            $fabrica->fabricarCarros($veiculos);
+            $fabrica->fabricarVeiculos($veiculos);
 
             $_SESSION['fabrica']= serialize($fabrica);
 
@@ -93,9 +111,13 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
 
         break;
         case "venda":
+            $fabrica = unserialize($_SESSION['fabrica']);
+
+            $fabrica->mostrarVeiculos();
+
             echo '
             
-            <h1>Informe o Modelo e Cor que deseja vender</h1>
+            <h1>Informe o Modelo,  Cor e qual veiculo que deseja vender </h1>
             
             <form action="processa.php" method="POST">
             
@@ -105,36 +127,47 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             <input type="text" name="modelo">
             <label>Cor: </label>
             <input type="text" name="cor">
+
+            <select name="tipo_veiculo">
+                <option value="moto">Moto</option>
+                <option value="carro">Carro</option>
+
+            </select>
+
             <button type="submit">Avançar</button>
             
             </form>';
+            $_SESSION['fabrica']= serialize($fabrica);
+
             echo "
                 <a href='..\View\index.html'>Voltar ao menu</a>";
+            
             break;
         case "venderCarro":
           
             if(!isset($_SESSION['fabrica'])){
-                echo"<h1>Não há carros fabricados!!</h1>";
+                echo"<h1>Não há veiculos fabricados!!</h1>";
                 echo "<a href='..\View\index.html'>Voltar ao menu</a>";
                 break;
             }
 
             $modelo = $_POST['modelo'] ?? "";
             $cor = $_POST['cor'] ?? "";
+            $tipo = $_POST['tipo_veiculo']?? "";
 
             $fabrica = unserialize($_SESSION['fabrica']);
 
 
-            $validador = $fabrica->venderCarros($modelo,$cor);
+            $validador = $fabrica->venderVeiculos($modelo,$cor);
 
             if($validador){
                 
                 echo "
-                <h3>Carro vendido com sucesso!!</h3>
+                <h3> Efetuado a Venda: ".$tipo."!!</h3>
                 <p>Modelo: {$modelo} e Cor: {$cor}</p>";
 
             }else{
-                echo"Não há carros cadastrados com essas informações!!";
+                echo"Não há carros veiculos com essas informações!!";
             }
             
             $_SESSION['fabrica']= serialize($fabrica);
@@ -149,8 +182,8 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
                 break;
             }
             $fabrica = unserialize($_SESSION['fabrica']);
-            echo "Carros fabricados: <br> ";
-            $fabrica->mostrarCarros();
+            echo "Veiculos fabricados: <br> ";
+            $fabrica->mostrarVeiculos();
             echo"<form action='processa.php' method='POST'>
             
             <input type='hidden'name='acao' value='finalizar_secao'>

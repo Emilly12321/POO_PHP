@@ -1,22 +1,22 @@
 <?php 
 
-require_once 'Carro.php';
 class Fabrica{  
-    private array $guardarCarros = [];
+    private array $guardarVeiculos = [];
 
-    public function fabricarCarros(array $carro):void{
-        foreach($carro as $carro){
-            $this->guardarCarros[$i] = $carro;
+    public function fabricarVeiculos(array $veiculo):void{
+        foreach($veiculo as $veiculo){
+            $this->guardarVeiculos[] = $veiculo;
         }
     }
 
-    public function venderCarros(string $modelo, string $cor):bool{
+    public function venderVeiculos(string $modelo, string $cor):bool{
     
-        foreach($this->guardarCarros as $i => $guardarCarros){
+        foreach($this->guardarVeiculos as $i => $guardarVeiculos){
 
-            if( $guardarCarros->getModelo() === $modelo &&  $guardarCarros->getCor() === $cor){
+            if( $guardarVeiculos->getModelo() === $modelo &&  $guardarVeiculos->getCor() === $cor){
 
-                unset($this->guardarCarros[$i]);
+                unset($this->guardarVeiculos[$i]);
+                $this->guardarVeiculos = array_values($this->guardarVeiculos);
                 return true;
 
             }
@@ -26,16 +26,37 @@ class Fabrica{
         
     }
 
+     public function mostrarTipoVeiculos($tipo):void{
 
 
-    public function mostrarCarros():void{
+        foreach($this->guardarVeiculos as $i => $veiculo){
+            
+            if($veiculo instanceof $tipo){
 
-        $this->guardarCarros = array_values($this->guardarCarros);
-
-        foreach($this->guardarCarros as $i => $carro){
-            echo "<p>".($i+1)."° Carro: <br> <strong>Modelo:</strong> ". $carro->getModelo()." ||  <strong>Cor:</strong> ".$carro->getCor()."</p><br><br>";
+                echo "<h3>".($i+1).$tipo.": </h3><br>";
+                echo "<p><strong>Modelo:</strong> ". $veiculo->getModelo()." ||  <strong>Cor:</strong> ".$veiculo->getCor()."</p><br><br>";
+                
+            }
         }
+        
+    }
 
+
+
+    public function mostrarVeiculos():void{
+
+
+        foreach($this->guardarVeiculos as $i => $veiculo){
+            
+            if($veiculo instanceof Motos ){
+              echo "<h3>".($i+1)."  Moto: </h3><br>";
+            }else{
+                echo "<h3>".($i+1)."  Carro: </h3><br>";
+            }
+            echo "<p><strong>Modelo:</strong> ". $veiculo->getModelo()." ||  <strong>Cor:</strong> ".$veiculo->getCor()."</p><br><br>";
+            
+        }
+        
     }
 
 }
