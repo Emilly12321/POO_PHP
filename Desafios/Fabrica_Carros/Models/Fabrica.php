@@ -27,15 +27,21 @@
         }
 
         public function mostrarTipoVeiculos($tipo):void{
-
-            echo "<h3>Em estoque".$tipo.": </h3>";
-
+            echo $tipo." :";
+            $teste = false;
             foreach($this->guardarVeiculos as $i => $veiculo){
-                
+
                 if($veiculo instanceof $tipo){
                     echo "<p><strong>Modelo:</strong> ". $veiculo->getModelo()." ||  <strong>Cor:</strong> ".$veiculo->getCor()."</p><br><br>";
+                    $teste = true;
                 }
+
             }
+
+            if(!$teste){
+                echo "<p>Nao encontrado</p>";
+            }
+
             
         }
 

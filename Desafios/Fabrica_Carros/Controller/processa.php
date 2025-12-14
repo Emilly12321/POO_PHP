@@ -136,9 +136,7 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
                 
 
                 case 'Motos':
-                 $fabrica->mostrarTipoVeiculos($acaoDois);
-              
-
+                        $fabrica->mostrarTipoVeiculos($acaoDois);
                         echo ' <form action="processa.php" method="POST">
                         <input type="hidden" name="tipo_veiculo" value="Motos">
                         <input type="hidden" name="acao" value="venderCarro">
@@ -149,28 +147,28 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
                         <button type="submit">Enviar</button>
                         </form>';
 
+            
+
                 break;
 
                 case 'Carro':
-                     $fabrica->mostrarTipoVeiculos($acaoDois);         
+                    $fabrica->mostrarTipoVeiculos($acaoDois);         
 
-                         echo ' 
-                         <form action="processa.php" method="POST">
-                         <input type="hidden" name="tipo_veiculo" value="Carro">
-                         <input type="hidden" name="acao" value="venderCarro">
-                         <label>Modelo: </label>
-                         <input type="text" name="modelo">
-                         <label>Cor: </label>
-                         <input type="text" name="cor"><br>
-                         <button type="submit">Enviar</button>
-                         
-                         </form>';
+                    echo ' 
+                    <form action="processa.php" method="POST">
+                    <input type="hidden" name="tipo_veiculo" value="Carro">
+                    <input type="hidden" name="acao" value="venderCarro">
+                    <label>Modelo: </label>
+                    <input type="text" name="modelo">
+                    <label>Cor: </label>
+                    <input type="text" name="cor"><br>
+                    <button type="submit">Enviar</button>
+                    
+                    </form>';
                          
                         
                     break;
-                default:
-                     echo "Acao informada e invalida!";
-                break;
+            
                     
                     
                 }
