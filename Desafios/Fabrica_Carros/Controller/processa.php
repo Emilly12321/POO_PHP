@@ -47,7 +47,7 @@
                                 <label>Escolha um veículo:</label>
                                 <select name="tipo_veiculo" required>
                                     <option value="Motos">Moto</option>
-                                    <option value="Carro">Carro</option>
+                                    <option value="Carros">Carro</option>
                                 </select>
                                 </div>
                                 <div class="caixa-btn">
@@ -114,7 +114,7 @@
                 $veiculos = [];
 
                 for ($i = 1; $i <= $qtdeFabricar; $i++) {
-                    $veiculo = ($tipo == "Motos") ? new Motos() : new Carro();
+                    $veiculo = ($tipo == "Motos") ? new Motos() : new Carros();
                     $veiculo->setModelo($_POST["modelo_{$i}"] ?? "");
                     $veiculo->setCor($_POST["cor_{$i}"] ?? "");
                     $veiculos[] = $veiculo;
@@ -168,7 +168,7 @@
                         <input type="hidden" name="acao" value="venda">
                         <div class="caixa-btn-veiculos">
                             <button name="acaoDois" value="Motos" class="btn-primeiro">Motos</button>
-                            <button name="acaoDois" value="Carro" class="btn-primeiro">Carros</button>
+                            <button name="acaoDois" value="Carros" class="btn-primeiro">Carros</button>
                     </div>
                 </form>';
 
@@ -204,8 +204,9 @@
                 $cor = $_POST['cor'] ?? "";
                 $tipo = $_POST['tipo_veiculo'] ?? "";
 
-                $fabrica = unserialize($_SESSION['fabrica']);
-                $validador = $fabrica->venderVeiculos($modelo, $cor);
+                $fabrica = unserialize($_SESSION['fabrica'] ?? serialize(new Fabrica()));
+                
+                $validador = $fabrica->venderVeiculos($modelo, $cor,$tipo);
                 $_SESSION['fabrica'] = serialize($fabrica);
 
                 echo '<div class="container-pai">
@@ -227,7 +228,7 @@
                         <p><strong>Cor:</strong> ' . $cor . '</p>';
                 } else {
                     echo '<h3>Venda não realizada</h3>
-                        <p class="erro">Não há veículos com essas informações.</p>';
+                        <p class="erro">Não há '.$tipo.' em estoque com essas informações.</p>';
                 }
                 echo '<div class="caixa-btn">
                         <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
@@ -265,14 +266,14 @@
                                 <input type="hidden" name="acao" value="info">
                                 <div class="btn-info-veiculos">
                                     <button name="acaoInfo" value="Motos" class="btn-primeiro">Motos</button>
-                                    <button name="acaoInfo" value="Carro" class="btn-primeiro">Carros</button>
+                                    <button name="acaoInfo" value="Carros" class="btn-primeiro">Carros</button>
                                     <button name="acaoInfo" value="infoGeral" class="btn-primeiro">Em estoque</button>
                                 </div>
                             </form>';
 
                 switch ($acaoInfo) {
                     case 'Motos':
-                    case 'Carro':
+                    case 'Carros':
                         $fabrica->mostrarTipoVeiculos($acaoInfo);
                         break;
                     case 'infoGeral':
