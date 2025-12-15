@@ -48,13 +48,17 @@
 
         public function mostrarVeiculos():void{
 
+            $teste = false;
 
             foreach($this->guardarVeiculos as $i => $veiculo){
                 
                 echo "<div class='mostrar-veiculo'><p><strong>Tipo:</strong>".get_class($veiculo)."<br><strong>Modelo:</strong> ". $veiculo->getModelo()."<br><strong>Cor:</strong> ".$veiculo->getCor()."</p></div>";
-                
+                $teste = true;
+
             }
-            
+             if(!$teste){
+                echo "<p>Não há nenhum veículo disponível em estoque</p>";
+            }
         }
 
     }
