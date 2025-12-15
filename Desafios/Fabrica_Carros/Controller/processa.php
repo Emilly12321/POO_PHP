@@ -240,26 +240,12 @@
                 break;
 
             case "info":
-                if (!isset($_SESSION['fabrica'])) {
-                    echo '<div class="container-pai">
-                            <div class="container-esquerdo-info">
-                                <div class="caixa-card">
-                                    <p>Não há veículos cadastrados!</p>
-                                    <div class="caixa-btn">
-                                        <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container-direito"></div>
-                        </div>';
-                    break;
-                }
-
-                $fabrica = unserialize($_SESSION['fabrica']);
+                
+                $fabrica = unserialize($_SESSION['fabrica'] ?? serialize(new Fabrica()));
                 $acaoInfo = $_POST['acaoInfo'] ?? "";
 
                 echo '<div class="container-pai">
-                    <div class="container-esquerdo-info">
+                      <div class="container-esquerdo-info">
                         <div class="caixa-card">
                             <h3>Veículos fabricados</h3>
                             <form action="processa.php" method="POST" class="form-menu">
