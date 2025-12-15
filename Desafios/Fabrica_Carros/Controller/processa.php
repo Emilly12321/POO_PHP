@@ -221,7 +221,7 @@
                         </div>
                         <div class="caixa-card">';
                 if ($validador) {
-                    echo '<h3>Venda efetuada com sucesso</h3>
+                    echo '<h3 style="color: #228B22 ">Venda efetuada com sucesso</h3>
                         <p><strong>Tipo:</strong> ' . $tipo . '</p>
                         <p><strong>Modelo:</strong> ' . $modelo . '</p>
                         <p><strong>Cor:</strong> ' . $cor . '</p>';
