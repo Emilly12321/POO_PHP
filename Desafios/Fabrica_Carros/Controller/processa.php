@@ -137,7 +137,7 @@
                         </div>
                         <div class="caixa-card">
                             <h3>Sucesso na Fabricação</h3>
-                            <p class="sucesso">Os veículos do tipo <strong>' . $tipo . '</strong> foram fabricados com sucesso.</p>
+                            <p class="sucesso">Os veículos da categoria <strong>' . $tipo . '</strong> foram fabricados com sucesso.</p>
                             <div class="caixa-btn">
                                 <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
                             </div>
@@ -223,7 +223,7 @@
                         <div class="caixa-card">';
                 if ($validador) {
                     echo '<h3 style="color: #228B22 ">Venda efetuada com sucesso</h3>
-                        <p><strong>Tipo:</strong> ' . $tipo . '</p>
+                        <p><strong>Categoria:</strong> ' . $tipo . '</p>
                         <p><strong>Modelo:</strong> ' . $modelo . '</p>
                         <p><strong>Cor:</strong> ' . $cor . '</p>';
                 } else {
