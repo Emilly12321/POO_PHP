@@ -1,271 +1,331 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-br">
 
-session_start();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Menu-Fabrica de Veiculos</title>
+</head>
 
-require_once '../Models/Fabrica.php';
-require_once '../Models/Carro.php';
-require_once '../Models/Motos.php';
-
-if($_SERVER['REQUEST_METHOD']==="POST"){
-    $acao = $_POST['acao']??"";
+<body>
 
 
-    switch($acao){
-        case "fabricar":
-            echo'
-            <section>
-            
-            <form action="processa.php" method="POST">
-            <input type="hidden" name="acao" value="criandoVeiculo">
-            
-            
-            <label>Quantidade de veiculos a serem Fabricados:</label>
-            <input type="number" min="1" name="qtdeFabricar"><br><br>
-            <label>Escolha um veiculo para ser fabricado:</label>
-            <select name="tipo_veiculo">
-                <option value="Motos">Moto</option>
-                <option value="Carro">Carro</option>
 
-            </select><br><br>       
-            <button type="submit">Confirmar</button>
-            
+    <?php
+    session_start();
 
-            </form>
-            
-            </section>
-            
-            
-            ';
-            echo "
-                <a href='..\View\index.html'>Voltar ao menu</a>";
-            break;
-        case"criandoVeiculo":
-            
-            $qtdeFabricar = $_POST['qtdeFabricar']??"";
-            $tipo = $_POST['tipo_veiculo'] ?? "";
+    require_once '../Models/Fabrica.php';
+    require_once '../Models/Carro.php';
+    require_once '../Models/Motos.php';
 
-            echo "
-            <section>
-            <h1>Fabricando $tipo</h1>
-            <form action='processa.php' method='POST'>
-            <input type='hidden' name='acao' value='salvarVeiculo'>
-            <input type ='hidden' name='qtdeFabricar' value='{$qtdeFabricar}'>
-            <input type ='hidden' name='tipo_veiculo' value='{$tipo}'>
-            
-            
-            ";
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $acao = $_POST['acao'] ?? "";
 
-            for($i = 1 ; $i <= $qtdeFabricar ; $i++){
-                
-                echo"<br>
-                <label>Modelo:</label>
-                <input type='text' name='modelo_{$i}'><br>
-                <label>Cor:</label>
-                <input type='text' name='cor_{$i}'>
-                <br><br>
-                ";
-            }
-                
-                echo'<button type="submit">Confirmar</button>
-                </form></section>';
-                echo "
-                <a href='..\View\index.html'>Voltar ao menu</a>";
-                
-            
+        switch ($acao) {
 
-            break;
-        case "salvarVeiculo":
+            case "fabricar":
+                echo '
+                <div class="container-pai">
+                    <div class="container-esquerdo">
+                        <div class="fotos-integrantes">
+                            <img src="../assets/img/emilly.png" alt="Emmilly luz" class="fotos-inte">
+                            <img src="../assets/img/nivea.jpg" alt="Nivea souza" class="fotos-inte">
+                            <img src="../assets/img/ana.png" alt="Ana" class="fotos-inte">
+                        </div>
+                        <div class="titulos">
+                            <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                            <h1 class="texto-h1">Fábrica de Veículos</h1>
+                        </div>
+                        <div class="caixa-card">
+                            <h3>Fabricar Veículo</h3>
+                            <form action="processa.php" method="POST" class="form-menu">
+                                <input type="hidden" name="acao" value="criandoVeiculo">
+                                <div class="form-inputs-venda">
+                                <label>Quantidade de veículos a serem fabricados:</label>
+                                <input type="number" min="1" name="qtdeFabricar" required>
+                                <label>Escolha um veículo:</label>
+                                <select name="tipo_veiculo" required>
+                                    <option value="Motos">Moto</option>
+                                    <option value="Carro">Carro</option>
+                                </select>
+                                </div>
+                                <div class="caixa-btn">
+                                    <button type="submit" class="btn-primeiro">Confirmar</button>
+                                    <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="container-direito"></div>
+                </div>';
+                break;
 
-            $qtdeFabricar = $_POST['qtdeFabricar']??"";
-            $tipo = $_POST['tipo_veiculo'] ?? "";
-          
-            if(isset($_SESSION['fabrica'])){
-               $fabrica = unserialize($_SESSION['fabrica']);
-            }else{
-                
-                $fabrica = new Fabrica();
-            }
+            case "criandoVeiculo":
+                $qtdeFabricar = $_POST['qtdeFabricar'] ?? "";
+                $tipo = $_POST['tipo_veiculo'] ?? "";
 
-            $veiculos = [];
+                echo '
+                <div class="container-pai">
+                    <div class="container-esquerdo">
+                        <div class="fotos-integrantes">
+                            <img src="../assets/img/emilly.png" alt="Emmilly luz" class="fotos-inte">
+                            <img src="../assets/img/nivea.jpg" alt="Nivea souza" class="fotos-inte">
+                            <img src="../assets/img/ana.png" alt="Ana" class="fotos-inte">
+                        </div>
+                        <div class="titulos">
+                            <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                            <h1 class="texto-h1">Fabricando ' . $tipo . '</h1>
+                        </div>
+                        <div class="caixa-card">
+                            <h3>Informe os dados dos veículos</h3>
+                            <form action="processa.php" method="POST" class="form-menu">
+                                <input type="hidden" name="acao" value="salvarVeiculo">
+                                <input type="hidden" name="qtdeFabricar" value="' . $qtdeFabricar . '">
+                                <input type="hidden" name="tipo_veiculo" value="' . $tipo . '">';
 
-            for($i = 1 ;$i <= $qtdeFabricar ; $i++){
-                if($tipo == "Motos"){
-                    $veiculo = new Motos();
-                }else{
-                    $veiculo = new Carro();
-
+                for ($i = 1; $i <= $qtdeFabricar; $i++) {
+                    echo '
+                                <div class="bloco-veiculo">
+                                    <label>Modelo (' . $i . '):</label>
+                                    <input type="text" name="modelo_' . $i . '" required>
+                                    <label>Cor:</label>
+                                    <input type="text" name="cor_' . $i . '" required>
+                                </div>';
                 }
-                $veiculo->setModelo($_POST["modelo_{$i}"]??"");
-                $veiculo->setCor($_POST["cor_{$i}"]??"");
-                $veiculos[] = $veiculo;
-            }
-            $fabrica->fabricarVeiculos($veiculos);
 
-            $_SESSION['fabrica']= serialize($fabrica);
+                echo '
+                                <div class="caixa-btn">
+                                    <button type="submit" class="btn-primeiro">Confirmar</button>
+                                    <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="container-direito"></div>
+                </div>';
+                break;
 
-            echo "
-            <h3>Sucesso na Fabricação</h3>
-            <a href='..\View\index.html'>Voltar ao menu</a>
-            ";
+            case "salvarVeiculo":
+                $qtdeFabricar = $_POST['qtdeFabricar'] ?? "";
+                $tipo = $_POST['tipo_veiculo'] ?? "";
 
+                $fabrica = isset($_SESSION['fabrica']) ? unserialize($_SESSION['fabrica']) : new Fabrica();
+                $veiculos = [];
 
-        break;
-        case "venda":
-            if(!isset($_SESSION['fabrica'])){
-            echo"<h1>Não há veiculos para venda!!</h1>";
-            echo "<a href='..\View\index.html'>Voltar ao menu</a>";
-            break;
-            }
+                for ($i = 1; $i <= $qtdeFabricar; $i++) {
+                    $veiculo = ($tipo == "Motos") ? new Motos() : new Carro();
+                    $veiculo->setModelo($_POST["modelo_{$i}"] ?? "");
+                    $veiculo->setCor($_POST["cor_{$i}"] ?? "");
+                    $veiculos[] = $veiculo;
+                }
 
-            echo '
-            <h1>Informe Qual veiculo que deseja vender </h1>
-            
-            <form action="processa.php" method="POST">
-            
-            <input type="hidden" name="acao" value="venda">
+                $fabrica->fabricarVeiculos($veiculos);
+                $_SESSION['fabrica'] = serialize($fabrica);
 
-            <button name="acaoDois" value="Motos">Motos</button>
-            <button name="acaoDois" value="Carro">Carro</button>
+                echo '
+                <div class="container-pai">
+                    <div class="container-esquerdo">
+                        <div class="fotos-integrantes">
+                            <img src="../assets/img/emilly.png" class="fotos-inte">
+                            <img src="../assets/img/nivea.jpg" class="fotos-inte">
+                            <img src="../assets/img/ana.png" class="fotos-inte">
+                        </div>
+                        <div class="titulos">
+                            <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                            <h1 class="texto-h1">Fábrica de Veículos</h1>
+                        </div>
+                        <div class="caixa-card">
+                            <h3>Sucesso na Fabricação</h3>
+                            <p class="sucesso">Os veículos do tipo <strong>' . $tipo . '</strong> foram fabricados com sucesso.</p>
+                            <div class="caixa-btn">
+                                <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-direito"></div>
+                </div>';
+                break;
 
-            </form>';
-         
-            $acaoDois = $_POST['acaoDois']  ?? "";
-            $fabrica = unserialize($_SESSION['fabrica']);
+            case "venda":
+                $fabrica = unserialize($_SESSION['fabrica'] ?? serialize(new Fabrica()));
+                $acaoDois = $_POST['acaoDois'] ?? "";
 
-            switch($acaoDois){
-                
+                echo '<div class="container-pai">
+                <div class="container-esquerdo">
+                    <div class="fotos-integrantes">
+                        <img src="../assets/img/emilly.png" class="fotos-inte">
+                        <img src="../assets/img/nivea.jpg" class="fotos-inte">
+                        <img src="../assets/img/ana.png" class="fotos-inte">
+                    </div>
+                    <div class="titulos">
+                        <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                        <h1 class="texto-h1">Venda de Veículos</h1>
+                    </div>
+                    <div class="caixa-card">
+                        <h3>Escolha o tipo de veículo</h3>
+                        <form action="processa.php" method="POST" class="form-menu">
+                        <input type="hidden" name="acao" value="venda">
+                        <div class="caixa-btn-veiculos">
+                            <button name="acaoDois" value="Motos" class="btn-primeiro">Motos</button>
+                            <button name="acaoDois" value="Carro" class="btn-primeiro">Carros</button>
+                    </div>
+                </form>';
 
-                case 'Motos':
-                        $fabrica->mostrarTipoVeiculos($acaoDois);
-                        echo ' <form action="processa.php" method="POST">
-                        <input type="hidden" name="tipo_veiculo" value="Motos">
+                if ($acaoDois) {
+                    echo '<h3>' . $acaoDois . ' disponíveis</h3>';
+                    $fabrica->mostrarTipoVeiculos($acaoDois);
+                    echo '<form action="processa.php" method="POST" class="form-menu-venda">
                         <input type="hidden" name="acao" value="venderCarro">
-                        <label>Modelo: </label>
-                        <input type="text" name="modelo">
-                        <label>Cor: </label>
-                        <input type="text" name="cor"><br>
-                        <button type="submit">Enviar</button>
-                        </form>';
-
-            
-
-                break;
-
-                case 'Carro':
-                    $fabrica->mostrarTipoVeiculos($acaoDois);         
-
-                    echo ' 
-                    <form action="processa.php" method="POST">
-                    <input type="hidden" name="tipo_veiculo" value="Carro">
-                    <input type="hidden" name="acao" value="venderCarro">
-                    <label>Modelo: </label>
-                    <input type="text" name="modelo">
-                    <label>Cor: </label>
-                    <input type="text" name="cor"><br>
-                    <button type="submit">Enviar</button>
-                    
+                        <input type="hidden" name="tipo_veiculo" value="' . $acaoDois . '">
+                        <div class="form-inputs-venda">
+                            <p class="titulo-card">Informe os dados do veículo a ser vendido:</p>
+                            <label>Modelo:</label>
+                            <input type="text" name="modelo" required>
+                            <label>Cor:</label>
+                            <input type="text" name="cor" required>
+                        </div>
+                        <div class="caixa-btn">
+                            <button type="submit" class="btn-primeiro">Vender</button>
+                            <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                        </div>
                     </form>';
-                         
-                        
-                    break;
-            
-                    
-                    
                 }
-                
-              $_SESSION['fabrica']= serialize($fabrica);
-              echo "<a href='..\View\index.html'>Voltar ao menu</a>";
 
-            break;
-        case "venderCarro":
-          
-           
-
-            $modelo = $_POST['modelo'] ?? "";
-            $cor = $_POST['cor'] ?? "";
-            $tipo = $_POST['tipo_veiculo']?? "";
-
-            $fabrica = unserialize($_SESSION['fabrica']);
-
-
-            $validador = $fabrica->venderVeiculos($modelo,$cor);
-
-            if($validador){
-                
-                echo "
-                <h3> Efetuado a Venda: ".$tipo."!!</h3>
-                <p>Modelo: {$modelo} e Cor: {$cor}</p>";
-
-            }else{
-                echo"Não há  veiculos com essas informações!!";
-            }
-            
-            $_SESSION['fabrica']= serialize($fabrica);
-
-            echo "<a href='..\View\index.html'>Voltar ao menu</a>";
-
-        break;
-        case "info":
-            if(!isset($_SESSION['fabrica'])){
-                echo"<p>Não há veiculos cadastrados!</p><br>
-                <a href='..\View\index.html'>Voltar ao menu</a>";
-                break;
-            }
-            
-            $fabrica = unserialize($_SESSION['fabrica']);
-            echo "Veiculos fabricados: <br> ";
-
-            echo '
-            <form action="processa.php" method="POST">
-            
-            <input type="hidden" name="acao" value="info">
-
-            <button name="acaoInfo" value="Motos">Motos</button>
-            <button name="acaoInfo" value="Carro">Carro</button>
-            <button name="acaoInfo" value="infoGeral">Em estoque</button>
-            
-            </form>
-            
-            ';
-            $acaoInfo = $_POST['acaoInfo']??"";
-            
-            switch($acaoInfo){
-                
-                case'Motos':
-                $fabrica->mostrarTipoVeiculos($acaoInfo);
-                break;
-                
-                case'Carro':
-                $fabrica->mostrarTipoVeiculos($acaoInfo);
-                break;
-                
-                case'infoGeral':
-                $fabrica->mostrarVeiculos();
+                echo '</div> <!-- caixa-card -->
+                </div> <!-- container-esquerdo -->
+                <div class="container-direito"></div>
+                </div> <!-- container-pai -->';
                 break;
 
-            }
 
-            echo"<form action='processa.php' method='POST'>
-            
-            <input type='hidden'name='acao' value='finalizar_secao'>
-            <button>Fechar a Fábrica</button>
-            
-            </form>";
-            echo "<a href='..\View\index.html'>Voltar ao menu</a>";
-            break;
-        case "finalizar_secao":
-            session_destroy();
-            echo"<h1>Fábrica Fechada, veiculos foram destruídos...</h1>";
-            echo "<a href='..\View\index.html'>Voltar ao menu</a>";
-            break;
-        default:
-            echo"<h1></h1>";
-        break;
+            case "venderCarro":
+                $modelo = $_POST['modelo'] ?? "";
+                $cor = $_POST['cor'] ?? "";
+                $tipo = $_POST['tipo_veiculo'] ?? "";
+
+                $fabrica = unserialize($_SESSION['fabrica']);
+                $validador = $fabrica->venderVeiculos($modelo, $cor);
+                $_SESSION['fabrica'] = serialize($fabrica);
+
+                echo '<div class="container-pai">
+                    <div class="container-esquerdo">
+                        <div class="fotos-integrantes">
+                            <img src="../assets/img/emilly.png" class="fotos-inte">
+                            <img src="../assets/img/nivea.jpg" class="fotos-inte">
+                            <img src="../assets/img/ana.png" class="fotos-inte">
+                        </div>
+                        <div class="titulos">
+                            <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                            <h1 class="texto-h1">Venda de Veículos</h1>
+                        </div>
+                        <div class="caixa-card">';
+                if ($validador) {
+                    echo '<h3>Venda efetuada com sucesso</h3>
+                        <p><strong>Tipo:</strong> ' . $tipo . '</p>
+                        <p><strong>Modelo:</strong> ' . $modelo . '</p>
+                        <p><strong>Cor:</strong> ' . $cor . '</p>';
+                } else {
+                    echo '<h3>Venda não realizada</h3>
+                        <p class="erro">Não há veículos com essas informações.</p>';
+                }
+                echo '<div class="caixa-btn">
+                        <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                    </div>
+                    </div>
+                </div>
+                <div class="container-direito"></div>
+            </div>';
+                break;
+
+            case "info":
+                if (!isset($_SESSION['fabrica'])) {
+                    echo '<div class="container-pai">
+                            <div class="container-esquerdo-info">
+                                <div class="caixa-card">
+                                    <p>Não há veículos cadastrados!</p>
+                                    <div class="caixa-btn">
+                                        <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-direito"></div>
+                        </div>';
+                    break;
+                }
+
+                $fabrica = unserialize($_SESSION['fabrica']);
+                $acaoInfo = $_POST['acaoInfo'] ?? "";
+
+                echo '<div class="container-pai">
+                    <div class="container-esquerdo-info">
+                        <div class="caixa-card">
+                            <h3>Veículos fabricados</h3>
+                            <form action="processa.php" method="POST" class="form-menu">
+                                <input type="hidden" name="acao" value="info">
+                                <div class="btn-info-veiculos">
+                                    <button name="acaoInfo" value="Motos" class="btn-primeiro">Motos</button>
+                                    <button name="acaoInfo" value="Carro" class="btn-primeiro">Carros</button>
+                                    <button name="acaoInfo" value="infoGeral" class="btn-primeiro">Em estoque</button>
+                                </div>
+                            </form>';
+
+                switch ($acaoInfo) {
+                    case 'Motos':
+                    case 'Carro':
+                        $fabrica->mostrarTipoVeiculos($acaoInfo);
+                        break;
+                    case 'infoGeral':
+                        $fabrica->mostrarVeiculos();
+                        break;
+                }
+
+                echo '<form action="processa.php" method="POST" class="form-menu">
+                        <input type="hidden" name="acao" value="finalizar_secao">
+                        <div class="caixa-btn">
+                            <button class="btn-terceiro ">Fechar a Fábrica</button>
+                            <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="container-direito"></div>
+            </div>';
+                break;
+
+            case "finalizar_secao":
+                session_destroy();
+                echo '<div class="container-pai">
+                    <div class="container-esquerdo-info">
+                        <div class="caixa-card">
+                            <h3>Fábrica Fechada</h3>
+                            <p class="sucesso">Os veículos foram destruídos com sucesso.</p>
+                            <div class="caixa-btn">
+                                <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-direito"></div>
+                </div>';
+                break;
+
+            default:
+                echo '<div class="container-pai">
+                        <div class="container-esquerdo-info">
+                            <div class="caixa-card">
+                                <p>Ação inválida!</p>
+                                <div class="caixa-btn">
+                                    <a href="../View/index.html" class="btn-segundo">Voltar ao menu</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-direito"></div>
+                    </div>';
+                break;
+        }
     }
+    ?>
 
+</body>
 
-}
-
-
-
-?>
+</html>

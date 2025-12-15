@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Menu-Fabrica de Veiculos</title>
 </head>
+
 <body>
-    <section>
+    <div class="container-pai">
 
-        <form action="../Controller/processa.php" method="POST" id="formMenu">
+        <div class="container-esquerdo-menu">
+            <div class="fotos-integrantes">
+                <img src="../assets/img/emilly.png" alt="Emmilly luz" class="fotos-inte">
+                <img src="../assets/img/nivea.jpg" alt="Nivea souza" class="fotos-inte">
+                <img src="../assets/img/ana.png" alt="Ana" class="fotos-inte">
+            </div>
+            <div class="titulos">
+                <h2 class="subtitulo-principal">monte o seu veículo</h2>
+                <h1 class="texto-h1">Fábrica de Veículos</h1>
+                
+            </div>
 
-            <button type="submit" name="acao" value="fabricar">Fabricar Veiculo</button>
-            <button type="submit" name="acao" value="venda">Vender Veiculo</button>
-            <button type="submit" name="acao" value="info">Ver Informações</button>
+            <div class="caixa-card">
+                <h3>Menu Princial</h3>
+                <div class="container-menu">
 
-        </form>
+                    <form action="../Controller/processa.php" method="POST" id="formMenu" class="form-menu">
 
+                        <div class="caixa-btn">
 
-    </section>
+                            <button type="submit" name="acao" value="fabricar" class="btn-primeiro">Fabricar
+                                Veiculo</button>
+                            <button type="submit" name="acao" value="venda" class="btn-primeiro">Vender Veiculo</button>
+                            <button type="submit" name="acao" value="info" class="btn-primeiro">Ver Informações</button>
+                        </div>
 
-    
+                    </form>
+                </div>
+            </div>
+            <p class="pequenas-palavras">Este programa faz parte da atividade final da disciplina de <span class="label-strong">Programação Orientada a Objetos em PHP</span>.
+                 Ele apresenta uma simulação dinâmica de uma fábrica de veículos, permitindo criar, gerenciar e vender diferentes tipos de veículos</p>
+        </div>
+
+        <div class="container-direito">
+        </div>
+    </div>
 </body>
+
 </html>

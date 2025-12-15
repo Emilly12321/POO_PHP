@@ -32,7 +32,7 @@
             foreach($this->guardarVeiculos as $i => $veiculo){
 
                 if($veiculo instanceof $tipo){
-                    echo "<p><strong>Modelo:</strong> ". $veiculo->getModelo()." ||  <strong>Cor:</strong> ".$veiculo->getCor()."</p><br><br>";
+                    echo " <div class='mostrar-veiculo'><p><strong>Modelo:</strong> ". $veiculo->getModelo()." <br>  <strong>Cor:</strong> ".$veiculo->getCor()."</p></div><br><br>";
                     $teste = true;
                 }
 
@@ -57,7 +57,7 @@
                 }else{
                     echo "<h3>".($i+1)."  Carro: </h3><br>";
                 }
-                echo "<p><strong>Modelo:</strong> ". $veiculo->getModelo()." ||  <strong>Cor:</strong> ".$veiculo->getCor()."</p><br><br>";
+                echo "<div class='mostrar-veiculo'><p><strong>Modelo:</strong> ". $veiculo->getModelo()." <br>  <strong>Cor:</strong> ".$veiculo->getCor()."</p></div>";
                 
             }
             

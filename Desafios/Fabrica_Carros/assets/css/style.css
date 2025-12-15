@@ -1,0 +1,316 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: 'Poppins', 'Nunito', sans-serif;
+    color: #424242;
+   
+}
+.container-pai{
+    background-image: url("../img/background-img.jpg");
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+
+
+
+
+
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: capitalize;
+
+}
+h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #595959;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.pequenas-palavras {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #4E4E4E ;
+
+}
+.label-strong {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #6E43F0;
+}   
+
+
+.caixa-card{
+    gap: 20px;
+    background: #F6F6F6 ;
+    flex-direction: column;
+    border: 2rem;
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    height: auto;
+    border: 1px solid rgba(110, 67, 240, 0.3);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem ;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all .3s ease;
+}
+
+.btn-primeiro {
+    background: #6E43F0;
+    color: #fff;
+}
+.btn-primeiro:hover {
+    background: #432894;
+}
+.btn-segundo {
+    background: #8C8C8C;
+    color: #fff;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem ;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all .3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-segundo {
+    background: #6b6b6b;
+    color: #fff;
+}
+.btn-terceiro {
+    background: #DB0000;
+    color: #fff;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.caixa-card, .container-pai {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.caixa-btn {
+
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.form-menu{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+.titulos{
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+
+.fotos-integrantes{
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.fotos-inte{
+    border: 2px solid #6E43F0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 4px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+
+
+
+.container-menu{
+    width: 100%;
+    display: flex;
+
+}
+.container-esquerdo {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start ;
+
+}
+.container-esquerdo-menu{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.container-esquerdo-info{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    padding-left: 10%;
+
+}
+.container-direito{
+    width: 50%;
+    height: 100vh;
+}
+.container-esquerdo, .container-esquerdo-menu {
+    padding: 0 0 0 10%;
+    flex-direction: column;
+}
+.container-direito {
+
+}
+.btn-info-veiculos{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+.caixa-btn-veiculos{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+.form-inputs-venda{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid rgba(110, 67, 240, 0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: #fff ;
+    border-radius: 1rem;
+}
+
+.titulo-card{
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color:#432894
+}
+label{
+    margin-top: 10px;
+    font-weight: 500;
+    color: #595959;
+    font-size: 0.8rem;
+}
+.form-menu-venda{
+    width: 100%;
+}
+input[type="text"]{
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #432894;
+    font-size: 1rem;
+    outline: none;
+}
+input[type="number"]{
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #432894;
+    font-size: 1rem;
+    outline: none;
+}
+select{
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #432894;
+    font-size: 1rem;
+    outline: none;
+    
+
+}
+select option{
+    font-size: 1rem;
+
+}
+select:focus, input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #6E43F0;
+    box-shadow: 0 0 5px rgba(110, 67, 240, 0.5);
+}
+select:hover, input[type="text"]:hover, input[type="number"]:hover {
+    border-color: #432894;
+}
+.bloco-veiculo{
+    border: 1px solid rgba(110, 67, 240, 0.3);
+    padding: 15px;
+    border-radius: 1rem;
+    margin-bottom: 15px;
+    background-color: #fff ;
+    display: flex;
+    flex-direction: column;
+}
+.sucesso{
+    color: #228B22;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.mostrar-veiculo{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(110, 67, 240, 0.3);
+}
+.erro{
+    color: #DB0000;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
